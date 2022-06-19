@@ -32,7 +32,7 @@ const Nav = () => {
       <ul>
         <li>
           <Icon name="tag"></Icon>
-          <Link to="/tag">标签</Link>
+          <Link to="/tags">标签</Link>
         </li>
         <li>
           <svg className="icon">
