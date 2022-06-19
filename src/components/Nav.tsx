@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import React from "react";
+import Icon from "components/Icons"
 // 预防 TreeShaking
-require("Icons/money.svg");
-require("Icons/tag.svg");
-require("Icons/charts.svg");
+
 const NavWrapper = styled.nav`
   line-height: 24px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
@@ -32,10 +31,8 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <svg className="icon">
-            <use xlinkHref="#tag" />
-          </svg>
-          <Link to="/tags">标签</Link>
+          <Icon name="tag"></Icon>
+          <Link to="/tag">标签</Link>
         </li>
         <li>
           <svg className="icon">
