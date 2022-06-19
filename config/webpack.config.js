@@ -76,7 +76,7 @@ module.exports = function (webpackEnv) {
         // css is located in `static/css`, use '../../' to locate index.html folder
         // in production `paths.publicUrlOrPath` can be a relative path
         options: paths.publicUrlOrPath.startsWith('.')
-          ? {publicPath: '../../'}
+          ? { publicPath: '../../' }
           : {},
       },
       {
@@ -253,7 +253,7 @@ module.exports = function (webpackEnv) {
               : false,
           },
           cssProcessorPluginOptions: {
-            preset: ['default', {minifyFontValues: {removeQuotes: false}}],
+            preset: ['default', { minifyFontValues: { removeQuotes: false } }],
           },
         }),
       ],
@@ -322,7 +322,7 @@ module.exports = function (webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        {parser: {requireEnsure: false}},
+        { parser: { requireEnsure: false } },
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
@@ -351,8 +351,14 @@ module.exports = function (webpackEnv) {
             {
               test: /\.svg$/,
               use: [
-                {loader: 'svg-sprite-loader', options: {}},
-                {loader: 'svgo-loader', options: {}}
+                { loader: 'svg-sprite-loader', options: {} },
+                {
+                  loader: 'svgo-loader', options: {
+                    plugins: [
+                      { removeAttrs: { attrs: 'fill' } }
+                    ]
+                  }
+                }
               ]
             },
             // "url" loader works like "file" loader except that it embeds assets
@@ -412,7 +418,7 @@ module.exports = function (webpackEnv) {
                 presets: [
                   [
                     require.resolve('babel-preset-react-app/dependencies'),
-                    {helpers: true},
+                    { helpers: true },
                   ],
                 ],
                 cacheDirectory: true,

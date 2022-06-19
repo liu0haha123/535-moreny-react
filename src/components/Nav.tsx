@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React from "react";
-import Icon from "components/Icons"
+import Icon from "components/Icons";
 // 预防 TreeShaking
 
 const NavWrapper = styled.nav`
@@ -12,15 +12,24 @@ const NavWrapper = styled.nav`
 
     > li {
       width: 33.33%;
-      padding: 4px 0;
+
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .icon {
-        width: 24px;
-        height: 24px;
+      > a {
+        padding: 4px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .icon {
+          width: 24px;
+          height: 24px;
+        }
+        &.active{
+          color: red;
+          .icon{
+            fill: red;
+          }
+        }
       }
     }
   }
@@ -31,20 +40,22 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <Icon name="tag"></Icon>
-          <Link to="/tags">标签</Link>
+          <NavLink to="/tags">
+            <Icon name="tag" />
+            标签
+          </NavLink>
         </li>
         <li>
-          <svg className="icon">
-            <use xlinkHref="#money" />
-          </svg>
-          <Link to="/money">记账</Link>
+          <NavLink to="/money">
+            <Icon name="money" />
+            记账
+          </NavLink>
         </li>
         <li>
-          <svg className="icon">
-            <use xlinkHref="#charts" />
-          </svg>
-          <Link to="/Statistics">统计</Link>
+          <NavLink to="/Statistics">
+            <Icon name="charts" />
+            统计
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>
