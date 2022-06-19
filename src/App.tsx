@@ -1,7 +1,7 @@
 import React from 'react';
-import {HashRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-
+import Nav from './components/Nav';
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
@@ -12,17 +12,6 @@ const Main = styled.div`
   overflow: auto;
 `;
 
-const Nav = styled.nav`
-  > ul {
-    display: flex;
-
-    > li {
-      width: 33.33%;
-      padding: 16px;
-      text-align: center;
-    }
-  }
-`;
 
 function App() {
     return (
@@ -31,33 +20,21 @@ function App() {
                 <Main>
                     <Switch>
                         <Route path="/tags">
-                            <Tags/>
+                            <Tags />
                         </Route>
                         <Route path="/money">
-                            <Money/>
+                            <Money />
                         </Route>
                         <Route path="/Statistics">
-                            <Statistics/>
+                            <Statistics />
                         </Route>
-                        <Redirect exact from="/" to="money"/>
+                        <Redirect exact from="/" to="money" />
                         <Route path="*">
-                            <NoMatch/>
+                            <NoMatch />
                         </Route>
                     </Switch>
                 </Main>
-                <Nav>
-                    <ul>
-                        <li>
-                            <Link to="/tags">标签</Link>
-                        </li>
-                        <li>
-                            <Link to="/money">记账</Link>
-                        </li>
-                        <li>
-                            <Link to="/Statistics">统计</Link>
-                        </li>
-                    </ul>
-                </Nav>
+                <Nav></Nav>
             </Wrapper>
         </Router>
     );
@@ -67,7 +44,7 @@ function App() {
 function Tags() {
     return (
         <div>
-            <h2>标签页</h2>
+            <h2>标签</h2>
         </div>
     );
 }
