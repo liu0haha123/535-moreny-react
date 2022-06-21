@@ -14,7 +14,7 @@ function Layout(props:any) {
     return (
         <Wrapper>
             <Main>
-                <h2>{props.children}</h2>
+                {props.children}
             </Main>
             <Nav />
         </Wrapper>
