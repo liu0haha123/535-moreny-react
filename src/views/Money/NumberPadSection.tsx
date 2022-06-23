@@ -1,29 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { Wrapper } from "./NumberPadSection/Wrapper";
-
-const NumberPadSection: React.FC = () => {
+type Props = {
+  value: number;
+  onChange: (value: number) => void;
+  onOk?: () => void;
+};
+const NumberPadSection: React.FC<Props> = (props) => {
+  const output = props.value.toString()
+  const setOutput = (output: string) => {
+    let value 
+    if (output.length > 16) {
+      value = parseFloat(output.slice(0, 16));
+    } else if (output.length === 0) {
+      value = 0;
+    } else {
+      value = parseFloat(output)
+    }
+    props.onChange(value);
+  };
   const onclickButtonWrapper = (e: React.MouseEvent) => {
-    const text = (e.target as HTMLButtonElement).textContent
-    if (text === null) { return; }
+    const text = (e.target as HTMLButtonElement).textContent;
+    if (text === null) {
+      return;
+    }
     if (text === "OK") {
-      // TODO
-      return
+      if (props.onOk) {
+        props.onOk()
+      }
     }
     if ("0123456789.".split("").concat(["删除", "清空"]).indexOf(text) >= 0) {
-          setOutput(generateOutput(text, output));
+      setOutput(generateOutput(text, output));
     }
-
   };
-  const [output, _setOutput] = useState("0");
-  const setOutput = (output: string)=>{
-    if (output.length > 16) {
-      output = output.slice(0,16)
-    } else if (output.length === 0) {
-      output = "0"
-    }
-    _setOutput(output)
-  }
   return (
     <Wrapper>
       <div className="output">{output}</div>
@@ -45,5 +54,5 @@ const NumberPadSection: React.FC = () => {
       </div>
     </Wrapper>
   );
-}
+};
 export default NumberPadSection;

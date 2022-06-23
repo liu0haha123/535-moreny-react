@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+type Props = {
+  value: string[],
+  onChange:(selected:string[])=>void
+}
+const TagsSection: React.FC<Props> = (props) => {
 
-const TagsSection: React.FC = (props) => {
   const [tags, setTags] = useState<string[]>(["衣", "食", "住", "行"]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const selectedTags = props.value
   const tagOnclick = () => {
     const tagName = window.prompt("请输入标签名");
     if (tagName !== null) {
@@ -15,9 +19,9 @@ const TagsSection: React.FC = (props) => {
     console.log(index);
     if (index >= 0) {
       // 如果tag已经是选中的，就赋值一个含有其他所有没被选中的新对象
-      setSelectedTags(selectedTags.filter((t) => t !== tag));
+      props.onChange(selectedTags.filter((t) => t !== tag));
     } else {
-      setSelectedTags([...selectedTags, tag]);
+      props.onChange([...selectedTags, tag]);
       console.log(selectedTags);
     }
   };
