@@ -6,11 +6,12 @@ import NoteSection from "./Money/NoteSection";
 import CategorySection from "./Money/CategorySection";
 import NumberPadSection from "./Money/NumberPadSection";
 
-type CateGory = ("+"|"-")
+
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `
+
 function Money() {
   const [selected, setSelected] = useState({
     tags: [] as string[],
@@ -18,32 +19,34 @@ function Money() {
     category: "-" as CateGory,
     amount:0
   })
+
+  type CateGory = ("+" | "-")
+
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    })
+  }
   return (
     <MyLayout>
+
       <TagsSection
         value={selected.tags}
-        onChange={(tags) => {
-          setSelected({ ...selected, tags: tags });
-        }}
+        onChange={(tags) => onChange({ tags })}
       />
       <NoteSection
         value={selected.note}
-        onChange={(note) => {
-          setSelected({ ...selected, note: note });
-        }}
+        onChange={(note) => onChange({ note })}
       />
       <CategorySection
         value={selected.category}
-        onChange={(category) => {
-          setSelected({ ...selected, category: category });
-        }}
+        onChange={(category) => onChange({ category })}
       />
       <NumberPadSection
         value={selected.amount}
-        onChange={(amount) => {
-          setSelected({ ...selected, amount: amount });
-        }}
-        onOk = {()=>{}}
+        onChange={(amount) => onChange({ amount })}
+        onOk={() => {}}
       />
     </MyLayout>
   );
