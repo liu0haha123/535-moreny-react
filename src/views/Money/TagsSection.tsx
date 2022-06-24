@@ -2,42 +2,43 @@ import React from "react";
 import styled from "styled-components";
 import useTags from "views/useTags";
 type Props = {
-  value: string[],
-  onChange:(selected:string[])=>void
+  value: number[],
+  onChange:(selected:number[])=>void
 }
 const TagsSection: React.FC<Props> = (props) => {
 
   const { tags, setTags } = useTags()
-  const selectedTags = props.value
+  const selectedTagIds = props.value
   const tagOnclick = () => {
     const tagName = window.prompt("请输入标签名");
     if (tagName !== null) {
-      setTags([...tags, tagName]);
+
+      setTags([...tags, { id:Math.random() ,name:tagName }]);
     }
   };
-  const onToggleTags = (tag: string) => {
-    const index = selectedTags.indexOf(tag);
+  const onToggleTags = (tagId: number) => {
+    const index = selectedTagIds.indexOf(tagId);
     console.log(index);
     if (index >= 0) {
       // 如果tag已经是选中的，就赋值一个含有其他所有没被选中的新对象
-      props.onChange(selectedTags.filter((t) => t !== tag));
+      props.onChange(selectedTagIds.filter((t) => t !== tagId));
     } else {
-      props.onChange([...selectedTags, tag]);
-      console.log(selectedTags);
+      props.onChange([...selectedTagIds, tagId]);
+      console.log(selectedTagIds);
     }
   };
-  const getClass = (tag:string)=>selectedTags.indexOf(tag) >= 0 ? "selected" : ""
+  const getClass = (tagId:number)=>selectedTagIds.indexOf(tagId) >= 0 ? "selected" : ""
   // 注意需要执行的回调函数不能写立即执行的方法，用箭头函数包裹
   return (
     <Wrapper>
       <ol>
         {tags.map((tag) => (
           <li
-            key={tag}
-            onClick={() => onToggleTags(tag)}
-            className={getClass(tag)}
+            key={tag.id}
+            onClick={() => onToggleTags(tag.id)}
+            className={getClass(tag.id)}
           >
-            {tag}
+            {tag.name}
           </li>
         ))}
       </ol>
