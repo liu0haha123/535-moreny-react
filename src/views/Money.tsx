@@ -30,7 +30,6 @@ function Money() {
   }
   return (
     <MyLayout>
-
       <TagsSection
         value={selected.tagIds}
         onChange={(tagIds) => onChange({ tagIds })}

@@ -12,9 +12,9 @@ type Props = {
     name:string
 }
 const Icon = (props:Props) => {
-    return (
+  return ( 
       <svg className="icon">
-        <use xlinkHref={'#'+props.name} />
+      {props.name && <use xlinkHref={'#' + props.name} />}
       </svg>
     );
 }
