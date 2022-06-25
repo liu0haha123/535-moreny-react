@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.section`
   background-color: #f5f5f5;
-  padding: 0 16px;
+  padding: 14px 16px;
   font-size: 14px;
 `;
 type Props = {
