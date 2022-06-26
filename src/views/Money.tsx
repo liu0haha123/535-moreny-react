@@ -18,6 +18,10 @@ const defaultData = {
   category: "-" as CateGory,
   amount: 0,
 };
+
+const CategoryWrapper = styled.div`
+  background-color: #c4c4c4;
+`;
 function Money() {
   const [selected, setSelected] = useState(defaultData);
 
@@ -37,7 +41,6 @@ function Money() {
   };
   return (
     <MyLayout>
-      {JSON.stringify(selected)}
       <TagsSection
         value={selected.tagIds}
         onChange={(tagIds) => onChange({ tagIds })}
@@ -46,10 +49,12 @@ function Money() {
         value={selected.note}
         onChange={(note) => onChange({ note })}
       />
-      <CategorySection
-        value={selected.category}
-        onChange={(category) => onChange({ category })}
-      />
+      <CategoryWrapper>
+        <CategorySection
+          value={selected.category}
+          onChange={(category) => onChange({ category })}
+        />
+      </CategoryWrapper>
       <NumberPadSection
         value={selected.amount}
         onChange={(amount) => onChange({ amount })}

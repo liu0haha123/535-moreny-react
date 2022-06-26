@@ -16,11 +16,11 @@ const useTags = () => {
         { id: createId(), name: "行" },
       ];
     }
-    setTags(localTags)
-  }, []);// 组件挂载的时候读取数据
+    setTags(localTags);
+  }, []); // 组件挂载的时候读取数据
   useUpdate(() => {
     window.localStorage.setItem("tags", JSON.stringify(tags));
-  }, [tags]);
+  }, tags);
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
   const findTagIndex = (id: number) => {
     let result = -1;
@@ -44,6 +44,10 @@ const useTags = () => {
       setTags([...tags, { id: createId(), name: tagName }]);
     }
   };
+  const getName = (id: number) => {
+    const tag = tags.filter((tag) => tag.id === id)[0];
+    return tag ? tag.name : "";
+  };
   return {
     tags,
     setTags,
@@ -52,6 +56,7 @@ const useTags = () => {
     findTagIndex,
     deleteTag,
     addTag,
+    getName
   };
 };
 

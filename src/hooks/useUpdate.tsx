@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useUpdate = (fn: () => void, deps: any[]) => {
+const useUpdate = (fn: () => void, dependency: any[]) => {
   const count = useRef(0);
   useEffect(() => {
     count.current += 1;
@@ -9,8 +9,7 @@ const useUpdate = (fn: () => void, deps: any[]) => {
     if (count.current >= 1) {
       fn();
     }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deps]); // 注意不可变数据
+  }, [fn, dependency]); // 注意不可变数据
 };
 
 export default useUpdate
