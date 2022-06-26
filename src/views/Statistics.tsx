@@ -52,7 +52,6 @@ function Statistics() {
     }
     hash[key].push(record);
   });
-  console.log(selectedRecords);
 
   const array = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0;
@@ -61,7 +60,7 @@ function Statistics() {
     return 0;
   });
   return (
-    <Layout>
+    <Layout scrollTop={9999}>
       <CategoryWrapper>
         <CategorySection
           value={category}
@@ -69,7 +68,7 @@ function Statistics() {
         />
       </CategoryWrapper>
       {array.map(([date, records]) => (
-        <div>
+        <div key={date}>
           <Header>{date}</Header>
           <div>
             {records.map((record) => {
@@ -77,7 +76,7 @@ function Statistics() {
                 <Item key={record.createdAt}>
                   <div className="tags">
                     {record.tagIds
-                      .map((tagId) => <span>{getName(tagId)}</span>)
+                      .map((tagId) => <span key={tagId}>{getName(tagId)}</span>)
                       .reduce(
                         (result, span, index, array) =>
                           result.concat(
