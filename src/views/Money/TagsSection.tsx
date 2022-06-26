@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import useTags from "views/useTags";
+import useTags from "hooks/useTags";
 type Props = {
   value: number[],
   onChange:(selected:number[])=>void
@@ -12,13 +12,11 @@ const TagsSection: React.FC<Props> = (props) => {
 
   const onToggleTags = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
-    console.log(index);
     if (index >= 0) {
       // 如果tag已经是选中的，就赋值一个含有其他所有没被选中的新对象
       props.onChange(selectedTagIds.filter((t) => t !== tagId));
     } else {
       props.onChange([...selectedTagIds, tagId]);
-      console.log(selectedTagIds);
     }
   };
   const getClass = (tagId:number)=>selectedTagIds.indexOf(tagId) >= 0 ? "selected" : ""

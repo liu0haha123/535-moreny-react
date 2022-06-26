@@ -8,7 +8,6 @@ const useTags = () => {
   // 如果不检测渲染次数的话会有一个先从undefined到[]的额外过程
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]");
-    console.log(localTags);
     if (localTags.length === 0) {
       localTags = [
         { id: createId(), name: "衣" },
